@@ -2,19 +2,32 @@ from flask import *
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, LoginManager, login_user, logout_user, login_required, current_user
 from apscheduler.schedulers.background import BackgroundScheduler
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "WebsiteMadeByDom"
 
-def action():
-    # your function code here
+
+def calPdate(datelist):
+    #list code
     pass
+
+def sendMessage(name,phno):
+    #Twillo code here
+    pass
+
+def action():
+    print("Scheduler is working")
+    results = session.query(User).filter(User.pdate == date.today()).all()  #YYYY-MM-DD
+    for result in results:
+        sendMessage(result.name,result.phno)
+
 
 scheduler = BackgroundScheduler()
 run_time = datetime.now() + timedelta(hours=24)
-scheduler.add_job(action, 'interval', run_date=run_time)
-scheduler.start()
+#scheduler.add_job(action, 'interval', run_date=run_time)
+scheduler.add_job(action, 'interval', seconds=3)
+#scheduler.start()
 
 # Database config
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
@@ -54,13 +67,14 @@ def home():
 def register():
     if request.method == "POST":       
         name, password, email, phno, datelist= request.form.get("name"), request.form.get("password"), request.form.get("email"), request.form.get("phno"),  request.form.get("datelist")
-        datelist=datelist.split(" ")
+        datelist=datelist.split(",")
         new_user = User(
             name = name,
             email = email,
             password = password,
             phno=phno,
-            datelist=datelist
+            datelist=datelist,
+            pdate=calPdate(datelist)
         )
         db.session.add(new_user)
         db.session.commit()
