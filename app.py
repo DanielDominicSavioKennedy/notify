@@ -1,11 +1,20 @@
 from flask import *
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, LoginManager, login_user, logout_user, login_required, current_user
-
+from apscheduler.schedulers.background import BackgroundScheduler
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "WebsiteMadeByDom"
 
+def action():
+    # your function code here
+    pass
+
+scheduler = BackgroundScheduler()
+run_time = datetime.now() + timedelta(hours=24)
+scheduler.add_job(action, 'interval', run_date=run_time)
+scheduler.start()
 
 # Database config
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
