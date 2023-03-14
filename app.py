@@ -13,12 +13,15 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 class User(UserMixin, db.Model):
-    __tablename__ = "Users"
+    __tablename__ = "User"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text, unique=True, nullable=False)
     email = db.Column(db.Text, unique=True, nullable=False)
     password = db.Column(db.Text, nullable=False)
     phno=db.Column(db.Text, nullable=False)
+    datelist= db.Column(db.PickleType, nullable=False)
+    pdate = db.Column(db.Date)
+
 
 with app.app_context():
     db.create_all()
@@ -40,15 +43,15 @@ def home():
 # User login part
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    if request.method == "POST":
-        
-        name, password, email, phno = request.form.get("name"), request.form.get("password"), request.form.get("email"), request.form.get("phno")
-
+    if request.method == "POST":       
+        name, password, email, phno, datelist= request.form.get("name"), request.form.get("password"), request.form.get("email"), request.form.get("phno"),  request.form.get("datelist")
+        datelist=datelist.split(" ")
         new_user = User(
             name = name,
             email = email,
             password = password,
-            phno=phno
+            phno=phno,
+            datelist=datelist
         )
         db.session.add(new_user)
         db.session.commit()
