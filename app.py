@@ -4,7 +4,7 @@ from flask_login import UserMixin, LoginManager, login_user, logout_user, login_
 
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "WebsiteMadeByCERN"
+app.config["SECRET_KEY"] = "WebsiteMadeByDom"
 
 
 # Database config
@@ -43,7 +43,7 @@ def register():
     if request.method == "POST":
         
         name, password, email, phno = request.form.get("name"), request.form.get("password"), request.form.get("email"), request.form.get("phno")
-        
+
         new_user = User(
             name = name,
             email = email,

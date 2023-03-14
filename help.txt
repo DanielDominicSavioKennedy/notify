@@ -1,0 +1,28 @@
+<--cmd-->pip install apscheduler
+
+
+<--flask-->
+from apscheduler.schedulers.background import BackgroundScheduler
+from datetime import datetime, timedelta
+from flask import Flask
+
+app = Flask(__name__)
+
+def my_function():
+    # your function code here
+    pass
+
+@app.route('/start_scheduler')
+def start_scheduler():
+    scheduler = BackgroundScheduler()
+    run_time = datetime.now() + timedelta(hours=24)
+    scheduler.add_job(my_function, 'date', run_date=run_time)
+    scheduler.start()
+    return 'Scheduler started!'
+
+if __name__ == '__main__':
+    app.run()
+
+
+<--twilo link-->
+https://api.whatsapp.com/send/?phone=14155238886&text&type=phone_number&app_absent=0
