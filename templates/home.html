@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="colourbg1">
+
+  <!--Part 1-->
+  <nav class="navbar navbar-expand-lg navbar-dark  navbar-custom navbar-fixed-top">
+    <div class="container-fluid ">
+      <a class="navbar-brand" href="#"><h1> notify </h1></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">Check</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+            <a class="btn btn-warning me-3" href={{ url_for('register')}}>Register</a>
+          <a class="btn btn-outline-warning me-3" href={{ url_for('login') }}>Login</a>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <div   class="intro d-flex justify-content-left mt-20">
+    <div data-aos="zoom-in-up" data-aos-duration="1500" class="textinto">
+    <div class="rre">
+      No need to keep the count<br>
+      get notified by <span class="mm">n</span>otify
+      </div>
+      <br>
+      <div class="err">
+       get personalised alerts.
+       <br><br>
+       <a class="btn btn1 btn-warning me-3 btn-lg" href={{ url_for('register')}}>Join us Now</a>
+      </div>
+    </div>
+      <img  data-aos="zoom-out-up" data-aos-duration="1500" class="imgmain" src="3dimg.png" style="height: 500px;">
+   </div>
+
+
+
+
+
+   <!--Part 2-->
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff"  d="M0,96L60,122.7C120,149,240,203,360,197.3C480,192,600,128,720,122.7C840,117,960,171,1080,181.3C1200,192,1320,160,1380,144L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+  </div>
+
+   <!--Part 3-->
+    <div class="container  d-flex align-items-center justify-content-center">
+            <div class="row ">
+                <div class="col-lg-7 px-3" data-aos="slide-down" data-aos-duration="1500"><img class="img1 mx-4 h-100 overflow-hidden rounded-4 " src="v5_222.png" alt=""></div>
+            
+                <div class="imgc col" data-aos="slide-up" data-aos-duration="1500"><h2> Learn where ever you wanth </h2><br>
+                   <p> Carry your class with you and attend where ever you want. Nothing is stopping you from learning.</p></div>  
+             </div>   
+    </div>        
+           
+    <div class="container  d-flex align-items-center justify-content-center">
+            <div class="row">
+                
+                <div data-aos="slide-down" data-aos-duration="1500" class="imgc col" ><h2> Learn from best educators around the world</h2><br>
+                   <p> EdLearn bring you all the best educators at one place to give you the best content possible.</p></div>      
+                <div class="col"><img data-aos="slide-up" data-aos-duration="1500" class="img2 mx-4 h-100 overflow-hidden rounded-4 " src="v56_311.png" alt=""></div>
+            </div>
+    </div>
+
+    <div class="container  d-flex align-items-center justify-content-center">
+      <div class="row ">
+          <div class="col-lg-7 px-3" data-aos="slide-down" data-aos-duration="1500"><img class="img1 mx-4 h-100 overflow-hidden rounded-4 " src="v5_225.png" alt=""></div>
+      
+          <div class="imgc col" data-aos="slide-up" data-aos-duration="1500"><h2> The class room in your hands </h2><br>
+             <p> Make teaching easy by bringing your class room home, updating yourself to the latest trends which children would love to listen.</p></div>  
+       </div>   
+</div>  
+{% endblock body %}
+
+

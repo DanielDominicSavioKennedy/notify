@@ -86,7 +86,7 @@ def load_user(user_id):
 
 @app.route("/")
 def home():
-    return render_template("index.html", logged_in=current_user.is_authenticated, user=current_user)
+    return render_template("home.html", logged_in=current_user.is_authenticated, user=current_user)
 
 
 # User login part
@@ -135,6 +135,20 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for("login"))
+
+@app.route("/update")
+def update():
+    user=current_user
+    li=user.datelist
+    li.append(str(datetime.date.today()))
+    user.datelist=li
+    user.pdate=calPdate(li)
+    return redirect(url_for("check"))
+
+@app.route("/check")
+def check():
+    return render_template("check.html",user=current_user)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,84 @@
+footer{
+background: linear-gradient(to bottom right, rgb(0, 0, 107), pink);
+}
+.imgc h2{
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 600;
+font-size: 3em;
+line-height: 1.2em;
+color: #EF9917;
+
+}
+
+.imgc p{
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 2em;
+line-height: 1.2em;
+
+color: #000000;
+}
+.top{
+    background: linear-gradient(to bottom right, rgb(0, 0, 107), pink);
+
+}
+
+.card-img-top {
+    max-width: 100%;
+    max-height: 50%;
+    padding-top:10px;
+}
+
+.features{
+
+    z-index: 5;
+    
+}
+
+.colourbg1{
+    background: linear-gradient(to bottom right, rgb(0, 0, 107), pink);
+}
+.colourbg2{
+    background: linear-gradient(to bottom left, pink, rgb(0, 0, 107));
+    z-index: 2;
+}
+
+.navbar-custom{
+    background-color: transparent;
+}
+
+
+
+.imgmain{
+    object-fit:scale-down;
+
+}
+.rre
+{
+
+font-family: Verdana;
+font-style: normal;
+font-weight: 300;
+font-size: 50px;
+line-height: 70px;
+color:white;
+
+}
+.mm
+{
+  color:rgba(255, 177, 84, 1);
+}
+.err
+{
+font-family: Verdana;
+font-style: normal;
+font-weight: 200;
+font-size: 20px;
+
+color:white;
+} 
+
+
+
