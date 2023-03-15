@@ -3,18 +3,45 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, LoginManager, login_user, logout_user, login_required, current_user
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime, timedelta, date
+from twilio.rest import Client
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "WebsiteMadeByDom"
 
 
 def calPdate(datelist):
-    #list code
-    pass
+    datelist = [datetime.strptime(d, '%Y-%m-%d') for d in datelist]
 
+    # calculate the total number of days between all dates
+    num_days = 0
+    for i in range(len(datelist) - 1):
+        delta = datelist[i+1] - datelist[i]
+        num_days += delta.days
+    # calculate the average number of days between all dates
+    avg_days = num_days / (len(datelist) - 1)
+    print("Average days = ",avg_days) # output: 4.5
+
+    # define the starting date
+    start_date = datelist[-1]
+    # calculate the ending date
+    end_date = start_date + timedelta(days=avg_days)
+    end_date=str(end_date).split(" ")[0]
+    print("Predicted date = ",end_date) # output: 2023-03-22 00:00:00
+    return end_date
+
+
+
+account_sid = 'AC99d7765d763b3d0eddb60b19a0f62d27'
+auth_token = '8d5318248035eb4f5a75ee525740f9eb'
+client = Client(account_sid, auth_token)
 def sendMessage(name,phno):
-    #Twillo code here
-    pass
+    message = client.messages.create(
+    from_='whatsapp:+14155238886',
+    body="Hey! {} your periods are on the way".format(name),
+    to="whatsapp:+91{}".format(phno)
+    )
+    print("message sent")
+#sendMessage("dominic",6305461499)
 
 def action():
     print("Scheduler is working")
@@ -26,8 +53,8 @@ def action():
 scheduler = BackgroundScheduler()
 run_time = datetime.now() + timedelta(hours=24)
 #scheduler.add_job(action, 'interval', run_date=run_time)
-scheduler.add_job(action, 'interval', seconds=3)
-#scheduler.start()
+scheduler.add_job(action, 'interval', hours=24)
+scheduler.start()
 
 # Database config
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
@@ -42,7 +69,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.Text, nullable=False)
     phno=db.Column(db.Text, nullable=False)
     datelist= db.Column(db.PickleType, nullable=False)
-    pdate = db.Column(db.Date)
+    pdate = db.Column(db.Text, nullable=False)
 
 
 with app.app_context():
@@ -68,6 +95,7 @@ def register():
     if request.method == "POST":       
         name, password, email, phno, datelist= request.form.get("name"), request.form.get("password"), request.form.get("email"), request.form.get("phno"),  request.form.get("datelist")
         datelist=datelist.split(",")
+        print(datelist)
         new_user = User(
             name = name,
             email = email,

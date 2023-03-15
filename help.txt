@@ -26,3 +26,35 @@ if __name__ == '__main__':
 
 <--twilo link-->
 https://api.whatsapp.com/send/?phone=14155238886&text&type=phone_number&app_absent=0
+
+
+<--finding cycle days>
+
+from datetime import datetime
+# define a list of dates
+date_list = [
+    datetime(2023, 3, 1),
+    datetime(2023, 3, 5),
+    datetime(2023, 3, 10),
+    datetime(2023, 3, 15)
+]
+# calculate the total number of days between all dates
+num_days = 0
+for i in range(len(date_list) - 1):
+    delta = date_list[i+1] - date_list[i]
+    num_days += delta.days
+# calculate the average number of days between all dates
+avg_days = num_days / (len(date_list) - 1)
+print(avg_days) # output: 4.5
+
+
+<--finding the date by adding the no of days-->
+
+from datetime import datetime, timedelta
+# define the starting date
+start_date = datetime(2023, 3, 15)
+# define the number of days to add
+num_days = 7
+# calculate the ending date
+end_date = start_date + timedelta(days=num_days)
+print(end_date) # output: 2023-03-22 00:00:00
