@@ -1,34 +1,9 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<div class="colourbg1">
 
   <!--Part 1-->
-  <nav class="navbar navbar-expand-lg navbar-dark  navbar-custom navbar-fixed-top">
-    <div class="container-fluid ">
-      <a class="navbar-brand" href="#"><h1> notify </h1></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">Check</a>
-          </li>
-        </ul>
-        <form class="d-flex">
-            <a class="btn btn-warning me-3" href={{ url_for('register')}}>Register</a>
-          <a class="btn btn-outline-warning me-3" href={{ url_for('login') }}>Login</a>
-        </form>
-      </div>
-    </div>
-  </nav>
+
 
   <div   class="intro d-flex justify-content-left mt-20">
     <div data-aos="zoom-in-up" data-aos-duration="1500" class="textinto">
@@ -80,7 +55,7 @@
           <div class="imgc col" data-aos="slide-up" data-aos-duration="1500"><h2> The class room in your hands </h2><br>
              <p> Make teaching easy by bringing your class room home, updating yourself to the latest trends which children would love to listen.</p></div>  
        </div>   
-</div>  
+  
 {% endblock body %}
 
 

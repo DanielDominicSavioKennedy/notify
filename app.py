@@ -137,6 +137,7 @@ def logout():
     return redirect(url_for("login"))
 
 @app.route("/update")
+@login_required
 def update():
     user=current_user
     li=user.datelist
@@ -146,6 +147,7 @@ def update():
     return redirect(url_for("check"))
 
 @app.route("/check")
+@login_required
 def check():
     return render_template("check.html",user=current_user)
 
