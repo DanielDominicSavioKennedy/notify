@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, LoginManager, login_user, logout_user, login_required, current_user
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime, timedelta, date
+import datetime as dt
 from twilio.rest import Client
 
 app = Flask(__name__)
@@ -141,9 +142,16 @@ def logout():
 def update():
     user=current_user
     li=user.datelist
-    li.append(str(datetime.date.today()))
+    li.append(str(dt.date.today()))
     user.datelist=li
     user.pdate=calPdate(li)
+    print(li)
+    print("-------")
+    print(user.datelist)
+    db.session.commit()
+    print("=======")
+    u=current_user
+    print(u.datelist)
     return redirect(url_for("check"))
 
 @app.route("/check")
