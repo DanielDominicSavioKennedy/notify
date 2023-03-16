@@ -7,13 +7,53 @@
   <h1>Hello {{user.name}}</h1>
   <br>
 <h2>Previous list of dates: <h1>
-    {% for date in user.datelist %}
+    {% for date in user.datelist.split(","): %}
 <li>{{date}}</li>
     {% endfor %}
 </h1></h2>
 <br>
+
+<div class="chart-container" style="position: relative; height:40vh; width:80vw">
+  <div class="container">My mensutral cycle</div>
+  <canvas id="myChart"></canvas>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: {{ datelist|tojson }},
+      datasets: [{
+        label: '# of Votes',
+        data:  {{ nodays|tojson }},
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+<br>
 <h2>Upcoming date: <h1>{{user.pdate}}</h1></h2><br>
-<a class="btn btn-warning me-3" href={{ url_for('update')}}>Click here if you got your periods</a>
+
+<form action="{{ url_for('update') }}" method="post">
+  <div class="form-group">
+    <label for="datelist">Enter the date</label>
+    <input type="text" class="form-control" id="date" name="date" required="required" placeholder="YYYY-MM-DD">
+  </div>
+  <button type="submit" class="btn btn-warning me-3">Submit</button>
+  <br><br>
+</form>
 <!--Whatsapp connection steps-->
 
 

@@ -9,10 +9,17 @@ from twilio.rest import Client
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "WebsiteMadeByDom"
 
+def daysCal(datelist):
+    datelist = [datetime.strptime(d, '%Y-%m-%d') for d in datelist]
+    # calculate the total number of days between all dates
+    num_days = list()
+    for i in range(len(datelist) - 1):
+        delta = datelist[i+1] - datelist[i]
+        num_days.append(str(delta).split(" ")[0])
+    return num_days
 
 def calPdate(datelist):
     datelist = [datetime.strptime(d, '%Y-%m-%d') for d in datelist]
-
     # calculate the total number of days between all dates
     num_days = 0
     for i in range(len(datelist) - 1):
@@ -20,14 +27,12 @@ def calPdate(datelist):
         num_days += delta.days
     # calculate the average number of days between all dates
     avg_days = num_days / (len(datelist) - 1)
-    print("Average days = ",avg_days) # output: 4.5
-
     # define the starting date
     start_date = datelist[-1]
     # calculate the ending date
     end_date = start_date + timedelta(days=avg_days)
     end_date=str(end_date).split(" ")[0]
-    print("Predicted date = ",end_date) # output: 2023-03-22 00:00:00
+    #print("Predicted date = ",end_date) # output: 2023-03-22 00:00:00
     return end_date
 
 
@@ -69,7 +74,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.Text, unique=True, nullable=False)
     password = db.Column(db.Text, nullable=False)
     phno=db.Column(db.Text, nullable=False)
-    datelist= db.Column(db.PickleType, nullable=False)
+    datelist= db.Column(db.Text, nullable=False)
     pdate = db.Column(db.Text, nullable=False)
 
 
@@ -83,7 +88,7 @@ login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(user_id)
+    return db.session.get(User, user_id)
 
 @app.route("/")
 def home():
@@ -95,15 +100,13 @@ def home():
 def register():
     if request.method == "POST":       
         name, password, email, phno, datelist= request.form.get("name"), request.form.get("password"), request.form.get("email"), request.form.get("phno"),  request.form.get("datelist")
-        datelist=datelist.split(",")
-        print(datelist)
         new_user = User(
             name = name,
             email = email,
             password = password,
             phno=phno,
             datelist=datelist,
-            pdate=calPdate(datelist)
+            pdate=calPdate(datelist.split(","))
         )
         db.session.add(new_user)
         db.session.commit()
@@ -137,27 +140,22 @@ def logout():
     logout_user()
     return redirect(url_for("login"))
 
-@app.route("/update")
+@app.route("/update",methods=['GET','POST'])
 @login_required
 def update():
+    print("check1")
     user=current_user
-    li=user.datelist
-    li.append(str(dt.date.today()))
-    user.datelist=li
-    user.pdate=calPdate(li)
-    print(li)
-    print("-------")
-    print(user.datelist)
+    li=user.datelist.split(",")
+    li.append(request.form.get("date"))
+    user.datelist=str(",".join(li))
+    user.pdate =calPdate(li)
     db.session.commit()
-    print("=======")
-    u=current_user
-    print(u.datelist)
     return redirect(url_for("check"))
 
 @app.route("/check")
 @login_required
 def check():
-    return render_template("check.html",user=current_user)
+    return render_template("check.html",user=current_user,datelist=current_user.datelist.split(",")[1:],nodays=daysCal(current_user.datelist.split(",")))
 
 
 if __name__ == "__main__":
