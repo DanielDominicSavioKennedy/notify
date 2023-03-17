@@ -80,11 +80,12 @@ def calPdate(datelist):
 
 #Scheduler
 def action():
-    #print("Scheduler is working")
+    print("Scheduler is working")
     with app.app_context():
         results = User.query.filter_by(pdate=str(dt.date.today())).all()
     for result in results:
         sendMessage(result.name,result.phno)
+    print("Sent")
 
 """def test():
     #app.app_context().push()
@@ -97,8 +98,8 @@ def action():
     return a"""
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(action, 'interval', hours=24)
-scheduler.start()
+scheduler.add_job(action, 'interval', seconds=5)
+#scheduler.start()
 
 @app.route("/")
 def home():

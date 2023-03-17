@@ -87,3 +87,6 @@ color:white;
     margin-bottom: 10%;
 }
 
+.card:hover{
+    transform: scale(1.1);
+}
