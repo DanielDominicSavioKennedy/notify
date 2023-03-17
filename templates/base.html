@@ -26,7 +26,7 @@
   <div class="colourbg1">
     <nav class="navbar navbar-expand-lg navbar-dark  navbar-custom navbar-fixed-top">
       <div class="container-fluid ">
-        <a class="navbar-brand" href="#"><h1> notify </h1></a>
+        <a class="navbar-brand" href={{ url_for('home') }}><h1> notify </h1></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -36,10 +36,7 @@
               <a class="nav-link active" aria-current="page" href={{ url_for('home')}}>Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href={{ url_for('check')}}>Check</a>
+              <a class="nav-link" href={{ url_for('check')}}>Profile</a>
             </li>
           </ul>
           {% if logged_in==false %}
@@ -63,78 +60,7 @@
 </body>
 <footer class="text-center text-lg-start text-white">
 
-<div class="container p-4 pb-0">
-
-<section class="">
-
-<div class="row">
-
-<div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-  <h6 class="text-uppercase mb-4 font-weight-bold">
-    EdLearn
-  </h6>
-  <p>
-    Let's spread education all around the world 
-    and spread skills to all the people irrespective of their location.
-  </p>
-</div>
-
-
-<hr class="w-100 clearfix d-md-none" />
-
-
-<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-  <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
-  <p>
-    <a class="text-white">Bootstrap</a>
-  </p>
-  <p>
-    <a class="text-white">WordPress</a>
-  </p>
-  <p>
-    <a class="text-white">BrandFlow</a>
-  </p>
-  <p>
-    <a class="text-white">Angular</a>
-  </p>
-</div>
-
-
-<hr class="w-100 clearfix d-md-none" />
-
-<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-  <h6 class="text-uppercase mb-4 font-weight-bold">
-    Useful links
-  </h6>
-  <p>
-    <a class="text-white">Your Account</a>
-  </p>
-  <p>
-    <a class="text-white">Become an Affiliate</a>
-  </p>
-  <p>
-    <a class="text-white">Shipping Rates</a>
-  </p>
-  <p>
-    <a class="text-white">Help</a>
-  </p>
-</div>
-
-<hr class="w-100 clearfix d-md-none" />
-
-
-<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-  <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-  <p><i class="fas fa-home mr-3"></i> India, Telangana, Hyderabad</p>
-  <p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
-  <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-  <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
-</div>
-
-</div>
-
-</section>
-
+<div class="container pb-0">
 
 <hr class="my-3">
 
@@ -146,7 +72,7 @@
   <div class="p-3">
     © 2023 Copyright:
     <a class="text-white" href="#"
-       >EdLearn</a
+       >notify</a
       >
   </div>
 

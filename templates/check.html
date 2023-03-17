@@ -1,62 +1,75 @@
 {% extends 'base.html' %}
 
 {% block body %}
-
-<!--Updating period date-->
-    <!--Date representation-->
-  <h1>Hello {{user.name}}</h1>
-  <br>
-<h2>Previous list of dates: <h1>
-    {% for date in user.datelist.split(","): %}
-<li>{{date}}</li>
-    {% endfor %}
-</h1></h2>
-<br>
-
-<div class="chart-container" style="position: relative; height:40vh; width:80vw">
-  <div class="container">My mensutral cycle</div>
-  <canvas id="myChart"></canvas>
 </div>
 
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-  const ctx = document.getElementById('myChart');
-
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: {{ datelist|tojson }},
-      datasets: [{
-        label: '# of Votes',
-        data:  {{ nodays|tojson }},
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-</script>
-<br>
-<h2>Upcoming date: <h1>{{user.pdate}}</h1></h2><br>
-
-<form action="{{ url_for('update') }}" method="post">
-  <div class="form-group">
-    <label for="datelist">Enter the date</label>
-    <input type="text" class="form-control" id="date" name="date" required="required" placeholder="YYYY-MM-DD">
-  </div>
-  <button type="submit" class="btn btn-warning me-3">Submit</button>
-  <br><br>
-</form>
-<!--Whatsapp connection steps-->
+<div class="container">
 
 
+  <h1 class="pt-2 px-3" > <i class="bi bi-person-fill"></i> {{user.name}}</h1>
+  <br>
+
+  <div class="container-fluid">
+    <div class="row d-flex flex-wrap">
+      <!--Date representation-->
+      <div class="col-md-7">
+        <div class="chart-container" style=" width:50vw">
+          <div class="container"><h1>Cycle Length</h1>
+            <canvas id="myChart"></canvas>
+          </div>
+        </div>
+      </div>
+     <div class='col-md-4 m-5'>
+        <div class="row">
+            <!--Upcoming date-->
+            <div class='col-md-12 udate'>
+              <div class="p-5">  
+                <h2>Next period  {{user.pdate}}</h2>
+              </div>
+            </div>
+            <br>
+            <br>
+            <!--Updating period date-->
+            <div class='col-md-12'>
+              <div>
+                <form action="{{ url_for('update') }}" method="post">
+                  <div class="form-group mb-3">
+                    <label for="datelist">Got your periods?</label>
+                    <input type="date" class="form-control" id="date" name="date" required="required" placeholder="Enter the date">
+                  </div>
+                  <button type="submit" class="btn btn-warning me-3">Submit</button>
+                </form>
+            </div>
+           </div>
+        </div>
+     </div>
+   </div>
+ </div>
 
 
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ <script>
+   const ctx = document.getElementById('myChart');
+
+   new Chart(ctx, {
+     type: 'bar',
+     data: {
+       labels: {{ datelist|tojson }},
+       datasets: [{
+         label: 'Cycle Length',
+         data:  {{ nodays|tojson }},
+         borderWidth: 1
+       }]
+     },
+     options: {
+       scales: {
+         y: {
+           beginAtZero: true
+         }
+       }
+     }
+   });
+ </script>
+<br><br><br><br><br><br><br>
+</div>
 {% endblock body %}

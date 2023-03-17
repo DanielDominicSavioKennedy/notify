@@ -1,5 +1,5 @@
 footer{
-background: linear-gradient(to bottom right, rgb(0, 0, 107), pink);
+background: linear-gradient(to bottom right,  rgb(250, 165, 179), rgb(148, 42, 103));
 }
 .imgc h2{
 font-family: 'Roboto';
@@ -38,7 +38,7 @@ color: #000000;
 }
 
 .colourbg1{
-    background: linear-gradient(to bottom right, rgb(0, 0, 107), pink);
+    background: linear-gradient(to bottom right, rgb(250, 165, 179), rgb(148, 42, 103));
 }
 .colourbg2{
     background: linear-gradient(to bottom left, pink, rgb(0, 0, 107));
@@ -80,5 +80,10 @@ font-size: 20px;
 color:white;
 } 
 
-
+.udate{
+    background: linear-gradient(to bottom left, rgb(250, 165, 179), rgb(208, 58, 145));
+    color: aliceblue;
+    border-radius: 10px;
+    margin-bottom: 10%;
+}
 
