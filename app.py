@@ -7,7 +7,49 @@ import datetime as dt
 from twilio.rest import Client
 
 app = Flask(__name__)
+
 app.config["SECRET_KEY"] = "WebsiteMadeByDom"
+
+# Database config
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db = SQLAlchemy(app)
+
+class User(UserMixin, db.Model):
+    __tablename__ = "User"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text, unique=True, nullable=False)
+    email = db.Column(db.Text, unique=True, nullable=False)
+    password = db.Column(db.Text, nullable=False)
+    phno=db.Column(db.Text, nullable=False)
+    datelist= db.Column(db.Text, nullable=False)
+    pdate = db.Column(db.Text, nullable=False)
+
+
+with app.app_context():
+    db.create_all()
+
+# Login Manager
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return db.session.get(User, user_id)
+
+#Twillo
+account_sid = 'AC99d7765d763b3d0eddb60b19a0f62d27'
+auth_token = '8d5318248035eb4f5a75ee525740f9eb'
+client = Client(account_sid, auth_token)
+def sendMessage(name,phno):
+    message = client.messages.create(
+    from_='whatsapp:+14155238886',
+    body="Hey! {} your periods are on the way".format(name),
+    to="whatsapp:+91{}".format(phno)
+    )
+    print("message sent")
+#sendMessage("dominic",6305461499)
+
 
 def daysCal(datelist):
     datelist = [datetime.strptime(d, '%Y-%m-%d') for d in datelist]
@@ -36,59 +78,27 @@ def calPdate(datelist):
     return end_date
 
 
-
-account_sid = 'AC99d7765d763b3d0eddb60b19a0f62d27'
-auth_token = '8d5318248035eb4f5a75ee525740f9eb'
-client = Client(account_sid, auth_token)
-def sendMessage(name,phno):
-    message = client.messages.create(
-    from_='whatsapp:+14155238886',
-    body="Hey! {} your periods are on the way".format(name),
-    to="whatsapp:+91{}".format(phno)
-    )
-    print("message sent")
-#sendMessage("dominic",6305461499)
-
+#Scheduler
 def action():
-    print("Scheduler is working")
-    results = session.query(User).filter(User.pdate == date.today()).all()  #YYYY-MM-DD
+    #print("Scheduler is working")
+    with app.app_context():
+        results = User.query.filter_by(pdate=str(dt.date.today())).all()
     for result in results:
         sendMessage(result.name,result.phno)
 
+"""def test():
+    #app.app_context().push()
+    with app.app_context():
+        results = User.query.filter_by(name="asd").all()
+    a=list()
+    for i in results:
+        a.append(i.name)
+    print(a)
+    return a"""
 
 scheduler = BackgroundScheduler()
-run_time = datetime.now() + timedelta(hours=24)
-#scheduler.add_job(action, 'interval', run_date=run_time)
 scheduler.add_job(action, 'interval', hours=24)
 scheduler.start()
-
-# Database config
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-db = SQLAlchemy(app)
-
-class User(UserMixin, db.Model):
-    __tablename__ = "User"
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Text, unique=True, nullable=False)
-    email = db.Column(db.Text, unique=True, nullable=False)
-    password = db.Column(db.Text, nullable=False)
-    phno=db.Column(db.Text, nullable=False)
-    datelist= db.Column(db.Text, nullable=False)
-    pdate = db.Column(db.Text, nullable=False)
-
-
-with app.app_context():
-    db.create_all()
-
-# Login Manager
-
-login_manager = LoginManager()
-login_manager.init_app(app)
-
-@login_manager.user_loader
-def load_user(user_id):
-    return db.session.get(User, user_id)
 
 @app.route("/")
 def home():
@@ -115,6 +125,7 @@ def register():
 
     return render_template("register.html", logged_in=current_user.is_authenticated)
 
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -134,11 +145,13 @@ def login():
 
     return render_template("login.html", logged_in=current_user.is_authenticated)
 
+
 @app.route("/logout")
 @login_required
 def logout():
     logout_user()
     return redirect(url_for("login"))
+
 
 @app.route("/update",methods=['GET','POST'])
 @login_required
@@ -152,6 +165,7 @@ def update():
     db.session.commit()
     return redirect(url_for("check"))
 
+
 @app.route("/check")
 @login_required
 def check():
@@ -159,4 +173,4 @@ def check():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
