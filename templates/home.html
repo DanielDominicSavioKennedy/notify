@@ -18,12 +18,8 @@
        <a class="btn btn1 btn-warning me-3 btn-lg" href={{ url_for('register')}}>Join us Now</a>
       </div>
     </div>
-      <img  data-aos="zoom-out-up" data-aos-duration="1500" class="imgmain" src="3dimg.png" style="height: 500px;">
+      <img  data-aos="zoom-out-up" data-aos-duration="1500" class="imgmain"  style="height: 500px;">
    </div>
-
-
-
-
 
    <!--Part 2-->
    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff"  d="M0,96L60,122.7C120,149,240,203,360,197.3C480,192,600,128,720,122.7C840,117,960,171,1080,181.3C1200,192,1320,160,1380,144L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
@@ -31,7 +27,7 @@
   <div class="heading" data-aos="zoom-out-up" data-aos-duration="1500">
     <h1>Follow these steps for Whatsapp alerts.</h1>
    </div>
-  <div id="carouselExampleCaptions" class="carousel slide">
+  <div id="carouselExampleCaptions" class="carousel slide p-5">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -71,32 +67,26 @@
   </div>
 
    <!--Part 3-->
-    <div class="container  d-flex align-items-center justify-content-center">
-            <div class="row ">
-                <div class="col-lg-7 px-3" data-aos="slide-down" data-aos-duration="1500"><img class="img1 mx-4 h-100 overflow-hidden rounded-4 " src="v5_222.png" alt=""></div>
-            
-                <div class="imgc col" data-aos="slide-up" data-aos-duration="1500"><h2> Learn where ever you wanth </h2><br>
-                   <p> Carry your class with you and attend where ever you want. Nothing is stopping you from learning.</p></div>  
-             </div>   
-    </div>        
-           
-    <div class="container  d-flex align-items-center justify-content-center">
-            <div class="row">
-                
-                <div data-aos="slide-down" data-aos-duration="1500" class="imgc col" ><h2> Learn from best educators around the world</h2><br>
-                   <p> EdLearn bring you all the best educators at one place to give you the best content possible.</p></div>      
-                <div class="col"><img data-aos="slide-up" data-aos-duration="1500" class="img2 mx-4 h-100 overflow-hidden rounded-4 " src="v56_311.png" alt=""></div>
-            </div>
-    </div>
 
-    <div class="container  d-flex align-items-center justify-content-center">
-      <div class="row ">
-          <div class="col-lg-7 px-3" data-aos="slide-down" data-aos-duration="1500"><img class="img1 mx-4 h-100 overflow-hidden rounded-4 " src="v5_225.png" alt=""></div>
-      
-          <div class="imgc col" data-aos="slide-up" data-aos-duration="1500"><h2> The class room in your hands </h2><br>
-             <p> Make teaching easy by bringing your class room home, updating yourself to the latest trends which children would love to listen.</p></div>  
-       </div>   
-  
+   <div class="container">
+    <div class="row row-cols-2">
+      <div class="col pt-5"><h2> Taking rest can mean different things to different women. For some, it may mean reducing physical activity and getting more restful sleep. For others, it may mean taking time off work or social engagements to allow their bodies to relax and recover.
+        </h2>
+      </div>
+      <div class="col text-center">
+        <img height=400px src={{ url_for('static', filename="images/people_gadgets_02.jpg") }} alt="">
+      </div>
+      <div class="col text-center">
+        <img height=400px src={{ url_for('static', filename="images/4365525.png") }} alt="">
+      </div>
+      <div class="col pt-5  text-right"><h2> Track your cycle, Get perdictions! Easily track your period, view future cycles and understand your fertile days. Feel more prepared and aware of your body signals with personalized insights.</h2></div>
+      <div class="col pt-5"><h2> Know your body. Own your health.
+        Understand your body alongside your cycle with Notify .If you want to know more about your body and how your cycle can affect everything from your mood to your energy levels, tracking your periods and ovulation is a great place to start.
+      </h2></div>
+      <div class="col text-center">
+        <img height=400px src={{ url_for('static', filename="images/5796792.jpg") }} alt="">
+      </div>
+    </div>
 {% endblock body %}
 
 

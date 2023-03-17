@@ -39,12 +39,12 @@ def load_user(user_id):
 
 #Twillo
 account_sid = 'AC99d7765d763b3d0eddb60b19a0f62d27'
-auth_token = '8d5318248035eb4f5a75ee525740f9eb'
+auth_token = 'f40c98cc98067c799a61b2b31e5aac26'
 client = Client(account_sid, auth_token)
 def sendMessage(name,phno):
     message = client.messages.create(
     from_='whatsapp:+14155238886',
-    body="Hey! {} your periods are on the way".format(name),
+    body="Hey {}!\nYour periods are on the way\n\nItems you might need:\n\nhttps://www.bigbasket.com/pc/beauty-hygiene/feminine-hygiene/tampons-menstrual-cups/\n\nhttps://www.stayfree.in/products\n\nhttps://www.bigbasket.com/ps/?q=period%20heat%20pack&nc=pscs#!page=1".format(name),
     to="whatsapp:+91{}".format(phno)
     )
     print("message sent")
