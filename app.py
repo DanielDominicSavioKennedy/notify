@@ -39,7 +39,7 @@ def load_user(user_id):
 
 #Twillo
 account_sid = 'AC99d7765d763b3d0eddb60b19a0f62d27'
-auth_token = 'f40c98cc98067c799a61b2b31e5aac26'
+auth_token = '6283be6e913eb4223ac51f3eb7b5dbb6'
 client = Client(account_sid, auth_token)
 def sendMessage(name,phno):
     message = client.messages.create(
@@ -99,7 +99,7 @@ def action():
 
 scheduler = BackgroundScheduler()
 scheduler.add_job(action, 'interval', seconds=5)
-#scheduler.start()
+scheduler.start()
 
 @app.route("/")
 def home():
@@ -142,7 +142,7 @@ def login():
             return redirect(url_for("login"))
 
         flash("User not registered with email!")
-        return redirect(url_for("login"))
+        return redirect(url_for("register"))
 
     return render_template("login.html", logged_in=current_user.is_authenticated)
 
