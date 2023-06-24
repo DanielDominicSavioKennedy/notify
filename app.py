@@ -125,8 +125,8 @@ def register():
         return redirect(url_for('home'))
 
     return render_template("register.html", logged_in=current_user.is_authenticated)
-
-
+                
+          
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
