@@ -118,7 +118,7 @@ def register():
             phno=phno,
             datelist=datelist,
             pdate=calPdate(datelist.split(","))
-        )
+        )        
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user)
