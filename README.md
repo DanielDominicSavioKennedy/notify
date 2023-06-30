@@ -17,7 +17,7 @@ To set up the Period Tracker website locally, follow these steps:
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/DanielDominicSavioKennedy/Smart-Hut.git
+   git clone https://github.com/DanielDominicSavioKennedy/notify.git
    ```
 
 2. Change into the project directory:
